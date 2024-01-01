@@ -6,10 +6,12 @@ import './App.css'
 function App() {
 
   return (
-    null
-    //div
+    <>
       // sort controls
+
       // sort visualiser
+      <SortVisualiser/>
+    </>
   )
 }
 export default App
