@@ -16,6 +16,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* bar color variables */
+  --color-bar: ;
+  --color-comp: ;
+
+
 }
 
 a {
