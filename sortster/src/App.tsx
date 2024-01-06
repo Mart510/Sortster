@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       {/* sort controls */}
-      // sort visualiser
+      {/* // sort visualiser */}
       <SortVisualiser/>
     </>
   )

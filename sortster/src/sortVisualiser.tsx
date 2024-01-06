@@ -11,7 +11,8 @@ const NUMBER_OF_BARS = 420;
 const BAR_COLOUR = 'teal-900';
 // colour of compared bars (when animated)
 const COMP_COLOUR = 'red-900';
-
+// bar width (bars to take up 80% of container in total with the spacing taking up the rest)
+const BAR_WIDTH = ((100/NUMBER_OF_BARS) * 0.8);
 
 // state for array bars, init to empty 
 const [barArr, setBarArr] = useState<number[]>([])
@@ -39,24 +40,22 @@ const resetBarArr = () => {
 
     return (
     // main div to hold everything
-    <div className="max-w-screen-2xl w-4/5 h-96 justify-between flex items-end">
+    <div className="max-w-bigScreen w-full h-[600rem] justify-between flex">
         {/* bars generated via map */}
         {barArr.map((value, idx) => (
             <div
             className={`
             array-bar 
             bg-teal-900 
-            w-2
-            ml-1
-            mr-1
             `}
             key={idx}
             style={{
                 backgroundColor: BAR_COLOUR,
-                height: `${value}px`
+                height: `${value / 100}%`,
+                width: `${BAR_WIDTH}%`
             }}
             >
-            {`${value}`}
+            &nbsp;
             </div>
         ))}
 
