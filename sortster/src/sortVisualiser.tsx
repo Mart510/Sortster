@@ -40,7 +40,7 @@ const resetBarArr = () => {
 
     return (
     // main div to hold everything
-    <div className="max-w-bigScreen w-full h-[600rem] justify-between flex">
+    <div className="max-w-max w-full h-[600rem] justify-between flex">
         {/* bars generated via map */}
         {barArr.map((value, idx) => (
             <div
