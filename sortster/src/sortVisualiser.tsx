@@ -45,13 +45,16 @@ const resetBarArr = () => {
             <div
             className={`
             array-bar 
-            bg-${BAR_COLOUR} 
-            h-[${value}px]
-            w-20
+            bg-teal-900 
+            w-2
             ml-1
             mr-1
             `}
             key={idx}
+            style={{
+                backgroundColor: BAR_COLOUR,
+                height: `${value}px`
+            }}
             >
             {`${value}`}
             </div>
