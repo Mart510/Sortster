@@ -12,7 +12,7 @@ const BAR_COLOUR = 'teal-900';
 // colour of compared bars (when animated)
 const COMP_COLOUR = 'red-900';
 // bar width (bars to take up 80% of container in total with the spacing taking up the rest)
-const BAR_WIDTH = ((100/NUMBER_OF_BARS) * 0.8);
+let BAR_WIDTH = 1;
 
 // state for array bars, init to empty 
 const [barArr, setBarArr] = useState<number[]>([])
@@ -31,6 +31,7 @@ const resetBarArr = (numOfBars : number) => {
     // set the array as the state
     setBarArr(barArray)
     NUMBER_OF_BARS = numOfBars // updates the global var
+    BAR_WIDTH = ((100/NUMBER_OF_BARS) * 0.8) // updates the global var
 }
 
 // Calculating the max value in the array to use to set bar height
