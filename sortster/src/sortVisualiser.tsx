@@ -57,9 +57,12 @@ const maxArrayVal : number = Math.max(...barArr)
     return (
         <>
         {/* set number of columns to sort */}
-            <div className="w-full">
-                <p>Number of Columns</p>
-                <input type="range" min="10" max="1000" value={colNum} className="slider" onChange={(e) => setColNum(parseInt(e.target.value, 10))}/>
+            <div className="w-3/5 flex items-center m-auto justify-center">
+                <p>Number of Columns:</p>
+                {/* input slider to control num of columns */}
+                <input type="range" min="10" max="1000" value={colNum} className="slider ml-1" onChange={(e) => setColNum(parseInt(e.target.value, 10))}/>
+                {/* box to display the num of columns and allow it to be typed in */}
+                <input type="number" min="10" max="1000" value={colNum} className="number ml-4 pl-2 pr-2 rounded-lg" onChange={(e) => setColNum(parseInt(e.target.value, 10))}/>
             </div>
         {/* column container */}
             <div className="w-full h-[20rem] justify-between flex items-end box-content">
