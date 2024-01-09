@@ -54,7 +54,7 @@ const SortVisualiser = () => {
   return (
     <>
       {/* set number of columns to sort */}
-      <div className="w-3/5 flex items-center m-auto justify-center">
+      <div className="w-3/5 flex items-center m-auto justify-center text-xs md:text-2xl">
         <p>Number of Columns:</p>
         {/* input slider to control num of columns */}
         <input
@@ -76,22 +76,22 @@ const SortVisualiser = () => {
         />
       </div>
       {/* Master columbn container */}
-      <div className="border-slate-900 dark:border-stone-500 border-2 p-4 m-4 rounded-2xl">
+      <div className="border-slate-900 dark:border-stone-500 border-2 p-4 m-4 rounded-2xl text-xs sm:text-lg">
       {/* header control container */}
-        <div className="flex justify-between">
+        <div className="flex justify-between mb-6">
         {/* sort method selector */}
-            <div>
-                <select name="sortMethod">
+            <div className="w-52">
+                <select className="sortMethod pl-1 pr-1 rounded-md">
                     <option value={''} disabled selected>Choose sort alogorithm</option>
                     <option value={'bogoSort'}>Bogo sort</option>
                 </select>
             </div>
         {/* number of moves counter */}
-            <div className="inline-flex">
-                <p>Total number of moves:</p><p>{`moveCount`}</p>
+            <div className="inline-flex w-64 text-center">
+                <p>Total number of moves:</p><p>{`0`}</p>
             </div>
         {/* timer */}
-            <div>
+            <div className="w-52 text-right">
                 <p>00:00</p>
             </div>
         </div>
