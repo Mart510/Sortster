@@ -32,6 +32,10 @@ const resetBarArr = () => {
     setBarArr(barArray)
 }
 
+// Calculating the max value in the array to use to set bar height
+const maxArrayVal : number = Math.max(...barArr)
+
+
 // After rendering reset the array
     useEffect(() => {
         console.log('setting initial array')
@@ -39,27 +43,26 @@ const resetBarArr = () => {
     }, []) // empty dependency array gets it to run just the once
 
     return (
-    // main div to hold everything
-    <div className="max-w-max w-full h-[600rem] justify-between flex">
-        {/* bars generated via map */}
-        {barArr.map((value, idx) => (
-            <div
-            className={`
-            array-bar 
-            bg-teal-900 
-            `}
-            key={idx}
-            style={{
-                backgroundColor: BAR_COLOUR,
-                height: `${value / 100}%`,
-                width: `${BAR_WIDTH}%`
-            }}
-            >
-            &nbsp;
-            </div>
-        ))}
+        <div className="w-full h-[10rem] justify-between flex items-end">
+            {/* bars generated via map */}
+            {barArr.map((value, idx) => (
+                <div
+                className={`
+                array-bar 
+                bg-teal-900 
+                `}
+                key={idx}
+                style={{
+                    backgroundColor: BAR_COLOUR,
+                    height: `${(value / maxArrayVal) * 100}%`,
+                    width: `${BAR_WIDTH}%`
+                }}
+                >
+                &nbsp;
+                </div>
+            ))}
 
-    </div>
+        </div>
     )
 }
 
