@@ -64,6 +64,18 @@ const SortVisualiser = () => {
           value={colNum}
           className="slider ml-1"
           onChange={(e) => setColNum(parseInt(e.target.value, 10))}
+          // scroll wheel adjustment functionality
+          onWheel={e => {
+            // change colNum based on wheel event
+            if (e.deltaY > 0) {
+                // Scroll down, decrement columns
+                setColNum((currentColNum) => Math.max(10, currentColNum - 10))
+            } else {
+            // Scroll up, increment columns
+            setColNum((currentColNum) => Math.min(1000, currentColNum + 10))
+                }
+            }
+        }
         />
         {/* box to display the num of columns and allow it to be typed in */}
         <input
@@ -73,6 +85,18 @@ const SortVisualiser = () => {
           value={colNum}
           className="number ml-4 pl-2 pr-2 rounded-lg"
           onChange={(e) => setColNum(parseInt(e.target.value, 10))}
+          // scroll wheel adjustment functionality
+          onWheel={e => {
+            // change colNum based on wheel event
+            if (e.deltaY > 0) {
+                // Scroll down, decrement columns
+                setColNum((currentColNum) => Math.max(10, currentColNum - 10))
+            } else {
+            // Scroll up, increment columns
+            setColNum((currentColNum) => Math.min(1000, currentColNum + 10))
+                }
+            }
+        }
         />
       </div>
       {/* Master columbn container */}
