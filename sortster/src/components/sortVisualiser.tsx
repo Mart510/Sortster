@@ -1,6 +1,6 @@
 // import block
 import React, { useEffect, useState } from "react";
-import randomIntInator from "./utils/randomIntGenerator";
+import randomIntInator from "../utils/randomIntGenerator";
 
 const SortVisualiser = () => {
   // Animation speed controller
@@ -19,6 +19,9 @@ const SortVisualiser = () => {
   const [colNum, setColNum] = useState(NUMBER_OF_BARS);
   // state for width (bars to take up 80% of container in total with the spacing taking up the rest)
   const [barWidth, setBarWidth] = useState<number>((100 / colNum) * 0.8);
+  // state for move number counter
+
+  // state for timer
 
   // reset bar array
   const resetBarArr = (numOfBars: number) => {

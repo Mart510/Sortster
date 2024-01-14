@@ -1,8 +1,10 @@
 // import block
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import React from 'react'
 import './App.css'
-import SortVisualiser from './sortVisualiser'
+// component importrs
+import SortVisualiser from './components/sortVisualiser'
+import StartResetButton from './components/startResetButton'
+import SortControls from './components/sortControls'
 
 function App() {
 
@@ -13,9 +15,12 @@ function App() {
       <h3>Sorting Algorithm Visualizer</h3>
     </div>
       {/* sort controls */}
+      <SortControls/>
       {/* <ColumnSetter/> */}
       {/* // sort visualiser */}
       <SortVisualiser/>
+      {/* start button */}
+      <StartResetButton/>
     </>
   )
 }
