@@ -6,8 +6,6 @@ import { ColumnNumberContext } from "../contexts/columnNumberContext";
 const SortVisualiser = () => {
   // Animation speed controller
   const ANIMATION_SPEED = 1;
-  // set num of bars in the array
-  const NUMBER_OF_BARS = 420;
   // Primary colour of array bars
   const BAR_COLOUR = "teal-900";
   // colour of compared bars (when animated)
