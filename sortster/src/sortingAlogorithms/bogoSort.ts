@@ -5,7 +5,7 @@ import sortChecker from "../utils/sortChecker";
 
 // Fischer-Yates shuffle function
     // randomise the array
-    const bogoArray = (currentArray) => {
+    const bogoArray = (currentArray: number[]) => {
         let currentIndex = currentArray.length, randomIndex;
 
         // While there remain elements to shuffle
@@ -26,9 +26,12 @@ import sortChecker from "../utils/sortChecker";
 
 export default function bogoSort(arr: number[]) {
     // Start loop
+    let moveCounter = 0;
     while(!sortChecker(arr)) {
+        console.log(`bogo attempt ${moveCounter}`)
         // Randomise the array
         arr = bogoArray(arr);
+        moveCounter++;
     }
     // if the array is sorted, return the sorted array
     return true
