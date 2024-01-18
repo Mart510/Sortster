@@ -21,7 +21,7 @@ const SortVisualiser = () => {
   // state for width (bars to take up 80% of container in total with the spacing taking up the rest)
   const [barWidth, setBarWidth] = useState<number>((100 / columnNumber) * 0.8);
   // state for move number counter
-
+  const [moveCount, setMoveCount] = useState<number>(0)
   // state for timer
 
   // reset bar array
@@ -70,7 +70,7 @@ const SortVisualiser = () => {
             </div>
         {/* number of moves counter */}
             <div className="inline-flex w-64 text-center">
-                <p>Total number of moves:</p><p>{`0`}</p>
+                <p>Total number of moves:</p><p>&nbsp;</p><p>{moveCount}</p>
             </div>
         {/* timer */}
             <div className="w-52 text-right">

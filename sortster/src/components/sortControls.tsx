@@ -2,7 +2,6 @@
 import { useContext } from "react"
 import { ColumnNumberContext } from "../contexts/columnNumberContext"
 
-
 // component to manage the column controls at the top of the page
 export default function SortControls() {
     // state block
@@ -12,6 +11,7 @@ export default function SortControls() {
     const handleWheelInput = (e) => {
     // TO DO
     // Add way to stop the window scrolling when interacting with these elements using on onWheel
+    
         // change number in input
         if (e.deltaY > 0) {
             // scroll down, decrement

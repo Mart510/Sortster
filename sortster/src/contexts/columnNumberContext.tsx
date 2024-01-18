@@ -18,7 +18,7 @@ export const ColumnNumberContext = createContext<ColumnNumberContextType>({
     updateColumnNumber: () => {},
 });
 
-
+// Provider 
 const ColumnNumberContextProvider: React.FC<ChildrenContextProviderProps> = ({ children }) => {
     //Use state to manage the column number
     const [colNum, setColNum] = useState(420);
