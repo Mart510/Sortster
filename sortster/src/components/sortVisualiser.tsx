@@ -1,6 +1,7 @@
 // import block
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import randomIntInator from "../utils/randomIntGenerator";
+import { ColumnNumberContext } from "../contexts/columnNumberContext";
 
 const SortVisualiser = () => {
   // Animation speed controller
@@ -15,8 +16,8 @@ const SortVisualiser = () => {
   // STATE BLOCK
   // state for array bars, init to empty
   const [barArr, setBarArr] = useState<number[]>([]);
-  // state for number of columns slider
-  const [colNum, setColNum] = useState(NUMBER_OF_BARS);
+  // state for number of columns from context
+  const { columnNumber: colNum, updateColumnNumber } = useContext(ColumnNumberContext)
   // state for width (bars to take up 80% of container in total with the spacing taking up the rest)
   const [barWidth, setBarWidth] = useState<number>((100 / colNum) * 0.8);
   // state for move number counter
@@ -37,7 +38,7 @@ const SortVisualiser = () => {
     }
     // set the array as the state
     setBarArr(barArray);
-    setColNum(numOfBars); // updates the global var
+    updateColumnNumber(numOfBars); // updates the global var
   };
 
   // Calculating the max value in the array to use to set bar height
@@ -56,52 +57,6 @@ const SortVisualiser = () => {
 
   return (
     <>
-      {/* set number of columns to sort */}
-      <div className="w-3/5 flex items-center m-auto justify-center text-xs md:text-2xl">
-        <p>Number of Columns:</p>
-        {/* input slider to control num of columns */}
-        <input
-          type="range"
-          min="10"
-          max="1000"
-          value={colNum}
-          className="slider ml-1"
-          onChange={(e) => setColNum(parseInt(e.target.value, 10))}
-          // scroll wheel adjustment functionality
-          onWheel={e => {
-            // change colNum based on wheel event
-            if (e.deltaY > 0) {
-                // Scroll down, decrement columns
-                setColNum((currentColNum) => Math.max(10, currentColNum - 10))
-            } else {
-            // Scroll up, increment columns
-            setColNum((currentColNum) => Math.min(1000, currentColNum + 10))
-                }
-            }
-        }
-        />
-        {/* box to display the num of columns and allow it to be typed in */}
-        <input
-          type="number"
-          min="10"
-          max="1000"
-          value={colNum}
-          className="number ml-4 pl-2 pr-2 rounded-lg"
-          onChange={(e) => setColNum(parseInt(e.target.value, 10))}
-          // scroll wheel adjustment functionality
-          onWheel={e => {
-            // change colNum based on wheel event
-            if (e.deltaY > 0) {
-                // Scroll down, decrement columns
-                setColNum((currentColNum) => Math.max(10, currentColNum - 10))
-            } else {
-            // Scroll up, increment columns
-            setColNum((currentColNum) => Math.min(1000, currentColNum + 10))
-                }
-            }
-        }
-        />
-      </div>
       {/* Master columbn container */}
       <div className="border-slate-900 dark:border-stone-500 border-2 p-4 m-4 rounded-2xl text-xs sm:text-lg">
       {/* header control container */}
