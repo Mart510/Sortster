@@ -17,9 +17,9 @@ const SortVisualiser = () => {
   // state for array bars, init to empty
   const [barArr, setBarArr] = useState<number[]>([]);
   // state for number of columns from context
-  const { columnNumber: colNum, updateColumnNumber } = useContext(ColumnNumberContext)
+  const { columnNumber, updateColumnNumber } = useContext(ColumnNumberContext)
   // state for width (bars to take up 80% of container in total with the spacing taking up the rest)
-  const [barWidth, setBarWidth] = useState<number>((100 / colNum) * 0.8);
+  const [barWidth, setBarWidth] = useState<number>((100 / columnNumber) * 0.8);
   // state for move number counter
 
   // state for timer
@@ -47,13 +47,13 @@ const SortVisualiser = () => {
   // Re do the bar array on change
   useEffect(() => {
     // update number of cols when slider changes
-    resetBarArr(colNum);
-  }, [colNum]); // empty dependency array gets it to run just the once
+    resetBarArr(columnNumber);
+  }, [columnNumber]); // empty dependency array gets it to run just the once
 
   // Recalculate BAR_WIDTH whenever the component is rendered
   useEffect(() => {
-    setBarWidth((100 / colNum) * 0.8);
-  }, [colNum]);
+    setBarWidth((100 / columnNumber) * 0.8);
+  }, [columnNumber]);
 
   return (
     <>
