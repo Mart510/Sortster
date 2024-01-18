@@ -3,14 +3,36 @@
 
 import sortChecker from "../utils/sortChecker";
 
+// Fischer-Yates shuffle function
+    // randomise the array
+    const bogoArray = (currentArray: number[]) => {
+        let currentIndex = currentArray.length, randomIndex;
+
+        // While there remain elements to shuffle
+        while (currentIndex > 0) {
+            // pick a remaining element
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            // decrement current index
+            currentIndex--;
+
+        // Swap it with the current element
+        [currentArray[currentIndex], currentArray[randomIndex]] = [currentArray[randomIndex], currentArray[currentIndex]];
+        }
+    
+        // return the shuffled array
+        return currentArray
+    } 
+
+
 export default function bogoSort(arr: number[]) {
     // Start loop
+    let moveCounter = 0;
     while(!sortChecker(arr)) {
-    // randomise the array
-
-    // check if it's in order
-
-    // if it is exit the loop
-    return true
+        console.log(`bogo attempt ${moveCounter}`)
+        // Randomise the array
+        arr = bogoArray(arr);
+        moveCounter++;
     }
+    // if the array is sorted, return the sorted array
+    return true
 }
