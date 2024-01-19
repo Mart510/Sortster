@@ -2,6 +2,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import randomIntInator from "../utils/randomIntGenerator";
 import { ColumnNumberContext } from "../contexts/columnNumberContext";
+import bogoSort from "../sortingAlogorithms/bogoSort";
+import useTimer from "../customHooks/useTimer";
 
 const SortVisualiser = () => {
   // Animation speed controller
@@ -12,15 +14,22 @@ const SortVisualiser = () => {
   const COMP_COLOUR = "red-900";
 
   // STATE BLOCK
-  // state for array bars, init to empty
+  // state for array bars, init to empty (local state allows it to be animated)
   const [barArr, setBarArr] = useState<number[]>([]);
   // state for number of columns from context
   const { columnNumber, updateColumnNumber } = useContext(ColumnNumberContext)
   // state for width (bars to take up 80% of container in total with the spacing taking up the rest)
   const [barWidth, setBarWidth] = useState<number>((100 / columnNumber) * 0.8);
   // state for move number counter
-  const [moveCount, setMoveCount] = useState<number>(0)
+  const [moveCount, setMoveCount] = useState(0)
+
   // state for timer
+  const [startTimer, setStartTimer] = useState(false)
+  const timerReadout = useTimer(startTimer);
+
+  // state to store array at start of sort
+  const [barArrReset, setBarArrResetState] = useState(barArr)
+
 
   // reset bar array
   const resetBarArr = (numOfBars: number) => {
@@ -30,7 +39,7 @@ const SortVisualiser = () => {
     for (let i = 0; i < numOfBars; i++) {
       // for each get a random number and add it to the array
       barArray.push(
-        // values increased by 10 for better visualisation
+        // minimum values increased to 10 for better visualisation
         randomIntInator(10, numOfBars + 10)
       );
     }
@@ -53,6 +62,30 @@ const SortVisualiser = () => {
     setBarWidth((100 / columnNumber) * 0.8);
   }, [columnNumber]);
 
+  // Animation controller
+  function animationController():void {
+    // set reset value
+    setBarArrResetState(barArr);
+    // start timer
+    setStartTimer(true);
+    // Look up sort algo
+    // switch(sortAlgo) {
+      bogoSort(setBarArr, barArr.slice(), setMoveCount);
+      //   case 'Bogo Sort':
+      //     // Pass a copy of the array to be sorted
+      //     bogoSort(setBarArr, barArr.slice()); 
+      //     break;
+      //   case 'Bubble Sort':
+      //     break;
+      //   default:
+      //     break;
+      // }
+  }
+
+  const sortAlgorithm = () => {
+    bogoSort(setBarArr, barArr.slice(), setMoveCount);
+  }
+
   return (
     <>
       {/* Master columbn container */}
@@ -72,7 +105,7 @@ const SortVisualiser = () => {
             </div>
         {/* timer */}
             <div className="w-52 text-right">
-                <p>00:00</p>
+                <p>{timerReadout}</p>
             </div>
         </div>
       {/* column container */}
@@ -96,6 +129,15 @@ const SortVisualiser = () => {
         ))}
       </div>
     </div>
+    {/* Start / Reset buttons */}
+       <div className="md:w-1/5 flex justify-between content-center ml-auto mr-auto">
+          <button className="md:pl-8 md:pr-8" onClick={animationController}>
+            Start
+          </button>
+          <button className="md:pl-8 md:pr-8" >
+            Reset
+          </button>
+      </div>
     </>
   );
 };

@@ -20,7 +20,7 @@ function App() {
         {/* // sort visualiser */}
         <SortVisualiser/>
         {/* start button */}
-        <StartResetButton/>
+        {/* <StartResetButton/> */}
     </>
   )
 }

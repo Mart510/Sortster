@@ -24,15 +24,25 @@ import sortChecker from "../utils/sortChecker";
     } 
 
 
-export default function bogoSort(arr: number[]) {
+export default async function bogoSort(setBarArr, arr: number[], setMoveCount) {
     // Start loop
-    let moveCounter = 0;
+    let moves = 0;
     while(!sortChecker(arr)) {
-        console.log(`bogo attempt ${moveCounter}`)
+        console.log(`bogo attempt ${moves}`)
         // Randomise the array
         arr = bogoArray(arr);
-        moveCounter++;
+        // increment move counter
+        moves++;
+
+        // update state to visualize sort status
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                setBarArr([...arr]);
+                setMoveCount(moves)
+                resolve();
+            }, 100);
+        })        
     }
-    // if the array is sorted, return the sorted array
-    return true
+        // if the array is sorted, return the sorted array
+    return true;
 }
