@@ -1,7 +1,7 @@
 // Bogo sort algo
 // Note: Bogo is a joke sort, that in one universe is the fastest possible sort method of all time, however in ours it is a crapshoot and not considered a good method. But it is funny so it gets points for that.
-
 import sortChecker from "../utils/sortChecker";
+
 
 // Fischer-Yates shuffle function
     // randomise the array
@@ -24,9 +24,11 @@ import sortChecker from "../utils/sortChecker";
     } 
 
 
-export default async function bogoSort(setBarArr, arr: number[], setMoveCount) {
-    // Start loop
+export default async function bogoSort(setBarArr: (arr: number[]) => void, arr: number[], setMoveCount: (moves:number) => void) {
+
     let moves = 0;
+
+    // Start loop
     while(!sortChecker(arr)) {
         console.log(`bogo attempt ${moves}`)
         // Randomise the array
@@ -44,5 +46,6 @@ export default async function bogoSort(setBarArr, arr: number[], setMoveCount) {
         })        
     }
         // if the array is sorted, return the sorted array
+    console.log(`Bogo sort complete in only ${moves}!`)
     return true;
 }

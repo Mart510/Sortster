@@ -1,19 +1,27 @@
-// import block
-import bogoSort from "../sortingAlogorithms/bogoSort"
+import bogoSort from '../sortingAlogorithms/bogoSort';
 
-// blank test to confirm correct set up
-test('blank test to confrim set up', () => {
-    null
-})
+describe('bogoSort', () => {
+  it('should return true for an already sorted array', async () => {
+    const sortedArray = [1, 2, 3, 4, 5];
+    const setBarArrMock = jest.fn();
+    const setMoveCountMock = jest.fn();
 
-// Testing bogo Sort
-test('test with small array', () => {
-const result = bogoSort([1, 3, 2, 4, 9, 8])
+    // Call bogoSort function
+    const result = await bogoSort(setBarArrMock, sortedArray, setMoveCountMock);
+
+    // Expectations
     expect(result).toBe(true);
-})
+  });
 
-// Testing sorting array
-test('test with pre sorted array', () => {
-    const result = bogoSort([1, 2, 3])
-        expect(result).toBe(true);
-    })
+  it('should return true for an unsorted array', async () => {
+    const unsortedArray = [1, 3, 2];
+    const setBarArrMock = jest.fn();
+    const setMoveCountMock = jest.fn();
+
+    // Call bogoSort function
+    const result = await bogoSort(setBarArrMock, unsortedArray, setMoveCountMock);
+
+    // Expectations
+    expect(result).toBe(true);
+  });
+});

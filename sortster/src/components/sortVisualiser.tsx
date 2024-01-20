@@ -1,9 +1,11 @@
 // import block
 import React, { useContext, useEffect, useState } from "react";
 import randomIntInator from "../utils/randomIntGenerator";
-import { ColumnNumberContext } from "../contexts/columnNumberContext";
 import bogoSort from "../sortingAlogorithms/bogoSort";
 import useTimer from "../customHooks/useTimer";
+// context imports
+import { ColumnNumberContext } from "../contexts/columnNumberContext";
+import { StopSortContext } from "../contexts/stopSortContext";
 
 const SortVisualiser = () => {
   // Animation speed controller
@@ -14,21 +16,26 @@ const SortVisualiser = () => {
   const COMP_COLOUR = "red-900";
 
   // STATE BLOCK
-  // state for array bars, init to empty (local state allows it to be animated)
-  const [barArr, setBarArr] = useState<number[]>([]);
-  // state for number of columns from context
-  const { columnNumber, updateColumnNumber } = useContext(ColumnNumberContext)
-  // state for width (bars to take up 80% of container in total with the spacing taking up the rest)
-  const [barWidth, setBarWidth] = useState<number>((100 / columnNumber) * 0.8);
-  // state for move number counter
-  const [moveCount, setMoveCount] = useState(0)
+    // Global states
+    // number of columns from context
+    const { columnNumber, updateColumnNumber } = useContext(ColumnNumberContext)
+    // is stopped for stop/start and reset functions
+    const { isStopped, updateIsStoppedTrue, updateIsStoppedFalse } = useContext(StopSortContext);
 
-  // state for timer
-  const [startTimer, setStartTimer] = useState(false)
-  const timerReadout = useTimer(startTimer);
+    // Local states
+    // state for array bars, init to empty (local state allows it to be animated)
+    const [barArr, setBarArr] = useState<number[]>([]);
+    // state for width (bars to take up 80% of container in total with the spacing taking up the rest)
+    const [barWidth, setBarWidth] = useState<number>((100 / columnNumber) * 0.8);
+    // state for move number counter
+    const [moveCount, setMoveCount] = useState(0)
 
-  // state to store array at start of sort
-  const [barArrReset, setBarArrResetState] = useState(barArr)
+    // state for timer
+    const [startTimer, setStartTimer] = useState(false)
+    const timerReadout = useTimer(startTimer);
+
+    // state to store array at start of sort
+    const [barArrReset, setBarArrResetState] = useState(barArr)
 
 
   // reset bar array
@@ -39,8 +46,8 @@ const SortVisualiser = () => {
     for (let i = 0; i < numOfBars; i++) {
       // for each get a random number and add it to the array
       barArray.push(
-        // minimum values increased to 10 for better visualisation
-        randomIntInator(10, numOfBars + 10)
+        // minimum values increased to 2 for better visualisation
+        randomIntInator(2, numOfBars + 10)
       );
     }
     // set the array as the state
@@ -68,22 +75,36 @@ const SortVisualiser = () => {
     setBarArrResetState(barArr);
     // start timer
     setStartTimer(true);
-    // Look up sort algo
-    // switch(sortAlgo) {
-      bogoSort(setBarArr, barArr.slice(), setMoveCount);
-      //   case 'Bogo Sort':
-      //     // Pass a copy of the array to be sorted
-      //     bogoSort(setBarArr, barArr.slice()); 
-      //     break;
-      //   case 'Bubble Sort':
-      //     break;
-      //   default:
-      //     break;
-      // }
+    // Call the sort algo
+    sortAlgorithm()
+ 
   }
 
   const sortAlgorithm = () => {
     bogoSort(setBarArr, barArr.slice(), setMoveCount);
+  }
+
+  // Start button handler?
+
+  // Stop button handler
+  const stopSort = () => {
+    updateIsStoppedTrue();
+    console.log(`Stop button clicked isStopped state is now ${isStopped}`)
+  }
+
+  // Log isStopped state when it changes
+  useEffect(() => {
+  console.log(`isStopped state is now ${isStopped}`);
+  }, [isStopped]);
+  
+
+  // Reset button handler
+  const resetSort = () => {
+    // stop sort in progress
+    updateIsStoppedTrue();
+    console.log(`Reset button clicked isStopped state is now ${isStopped}`)
+    // reset column state
+    setBarArr(barArrReset);
   }
 
   return (
@@ -134,7 +155,10 @@ const SortVisualiser = () => {
           <button className="md:pl-8 md:pr-8" onClick={animationController}>
             Start
           </button>
-          <button className="md:pl-8 md:pr-8" >
+          <button className="md:pl-8 md:pr-8" onClick={stopSort}>
+            Stop
+          </button>
+          <button className="md:pl-8 md:pr-8" onClick={resetSort}>
             Reset
           </button>
       </div>
