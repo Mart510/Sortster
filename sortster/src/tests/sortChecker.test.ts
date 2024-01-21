@@ -42,12 +42,13 @@ test('super long ordered arrays', () => {
         return arrayOfArrays
     }
 
-    // generate array containing 20 arrays of length between 360 and 400
+    // generate array containing 800 arrays of length between 1500 and 3000
     const testInput = orderedBatchArrayGenerator(800, 3000);
 
     for (let i = 0; i < testInput.length; i++) {
         // console.log(`running test ${i} of ${testInput.length}`)
         const result = sortChecker(testInput[i]);
         expect(result).toBe(true);
+        // console.log(`test ${i} of ${testInput.length} passed`)
     }
 });
