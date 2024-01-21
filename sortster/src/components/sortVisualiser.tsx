@@ -6,6 +6,7 @@ import useTimer from "../customHooks/useTimer";
 // context imports
 import { ColumnNumberContext } from "../contexts/columnNumberContext";
 import { StopSortContext } from "../contexts/stopSortContext";
+import miracleSort from "../sortingAlogorithms/miracleSort";
 
 const SortVisualiser = () => {
   // Animation speed controller
@@ -36,6 +37,9 @@ const SortVisualiser = () => {
 
     // state to store array at start of sort
     const [barArrReset, setBarArrResetState] = useState(barArr)
+
+    // state for drop down selection
+    const [sortChoice, setSortChoice] = useState('')
 
 
   // reset bar array
@@ -76,12 +80,25 @@ const SortVisualiser = () => {
     // start timer
     setStartTimer(true);
     // Call the sort algo
-    sortAlgorithm()
+    sortAlgorithm(sortChoice)
  
   }
 
-  const sortAlgorithm = () => {
-    bogoSort(setBarArr, barArr.slice(), setMoveCount);
+  // onChange handler to update the sortChoice state
+  const sortChangeHandler = (dropDownChoice) => {
+    setSortChoice(dropDownChoice.target.value)
+  };
+
+  // sorting algorithm switch
+  const sortAlgorithm = (SortSelection:string) => {
+    switch(SortSelection) {
+      case 'bogo sort':
+        bogoSort(setBarArr, barArr.slice(), setMoveCount);
+        break;
+      case 'miracle sort':
+        miracleSort(setBarArr, barArr.slice(), setMoveCount);
+        break;
+    }
   }
 
   // Start button handler?
@@ -115,9 +132,10 @@ const SortVisualiser = () => {
         <div className="flex justify-between mb-6">
         {/* sort method selector */}
             <div className="w-52">
-                <select className="sortMethod pl-1 pr-1 rounded-md">
+                <select className="sortMethod pl-1 pr-1 rounded-md" onChange={sortChangeHandler}>
                     <option value={''} disabled selected>Choose sort alogorithm</option>
-                    <option value={'bogoSort'}>Bogo sort</option>
+                    <option value={'bogo sort'}>Bogo sort</option>
+                    <option value={'miracle sort'}>Miracle sort</option>
                 </select>
             </div>
         {/* number of moves counter */}

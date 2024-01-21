@@ -4,7 +4,7 @@ import sortChecker from "../utils/sortChecker";
 
 // Mircale sort
 export default async function miracleSort(setBarArr: (arr: number[]) => void, arr: number[], setMoveCount: (moves:number) => void) {
-    let moves = 0;
+    const moves = 0;
 
     // start checking
     while(!sortChecker(arr)) {
