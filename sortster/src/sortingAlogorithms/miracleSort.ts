@@ -4,11 +4,13 @@ import sortChecker from "../utils/sortChecker";
 
 // Mircale sort
 export default async function miracleSort(setBarArr: (arr: number[]) => void, arr: number[], setMoveCount: (moves:number) => void) {
-    const moves = 0;
+    let moves = 0;
 
     // start checking
     while(!sortChecker(arr)) {
         console.log(`miracle sort check number ${moves}`)
+        // increment move counter
+        moves++;
         // update state to visualise sort status
                 // update state to visualize sort status
                 await new Promise((resolve) => {
