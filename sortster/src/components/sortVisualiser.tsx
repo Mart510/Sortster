@@ -169,7 +169,7 @@ const SortVisualiser = () => {
       </div>
     </div>
     {/* Start / Reset buttons */}
-       <div className="md:w-1/5 flex justify-between content-center ml-auto mr-auto">
+       <div className="md:w-3/12 flex justify-between content-center ml-auto mr-auto">
           <button className="md:pl-8 md:pr-8" onClick={animationController}>
             Start
           </button>
