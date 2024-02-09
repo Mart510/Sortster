@@ -83,6 +83,12 @@ const SortVisualiser = () => {
     setStartTimer(true);
     // Call the sort algo
     sortAlgorithm(sortChoice)
+
+    // If sorting is not in progress, start a new sort
+    if (isStopped) {
+      updateIsStoppedFalse(); // Reset the stop condition
+      sortAlgorithm(sortChoice);
+    }
  
   }
 
@@ -104,6 +110,8 @@ const SortVisualiser = () => {
   }
 
   // Start button handler?
+
+
 
   // Stop button handler
   const stopSort = () => {
