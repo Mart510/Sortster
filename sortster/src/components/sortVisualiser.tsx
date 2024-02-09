@@ -21,7 +21,9 @@ const SortVisualiser = () => {
     // number of columns from context
     const { columnNumber, updateColumnNumber } = useContext(ColumnNumberContext)
     // is stopped for stop/start and reset functions
-    const { isStopped, updateIsStoppedTrue, updateIsStoppedFalse } = useContext(StopSortContext);
+    const { isStopped, updateIsStoppedTrue, updateIsStoppedFalse, stopRef } = useContext(
+      StopSortContext
+    );
 
     // Local states
     // state for array bars, init to empty (local state allows it to be animated)
@@ -93,10 +95,10 @@ const SortVisualiser = () => {
   const sortAlgorithm = (SortSelection:string) => {
     switch(SortSelection) {
       case 'bogo sort':
-        bogoSort(setBarArr, barArr.slice(), setMoveCount);
+        bogoSort(setBarArr, barArr.slice(), setMoveCount, stopRef);
         break;
       case 'miracle sort':
-        miracleSort(setBarArr, barArr.slice(), setMoveCount);
+        miracleSort(setBarArr, barArr.slice(), setMoveCount, stopRef);
         break;
     }
   }

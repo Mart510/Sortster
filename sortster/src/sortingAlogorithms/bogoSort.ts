@@ -24,28 +24,30 @@ import sortChecker from "../utils/sortChecker";
     } 
 
 
-export default async function bogoSort(setBarArr: (arr: number[]) => void, arr: number[], setMoveCount: (moves:number) => void) {
+export default async function bogoSort(setBarArr: (arr: number[]) => void, arr: number[], setMoveCount: (moves:number) => void, stopRef: React.MutableRefObject<boolean>) {
 
     let moves = 0;
 
     // Start loop
-    while(!sortChecker(arr)) {
-        console.log(`bogo attempt ${moves}`)
-        // Randomise the array
-        arr = bogoArray(arr);
-        // increment move counter
-        moves++;
-
-        // update state to visualize sort status
-        await new Promise((resolve) => {
-            setTimeout(() => {
-                setBarArr([...arr]);
-                setMoveCount(moves)
-                resolve();
-            }, 100);
-        })        
+    while (!sortChecker(arr) && !stopRef.current) {
+      //console.log(`bogo attempt ${moves}`);
+      
+      // Randomise the array
+      arr = bogoArray(arr);
+      
+      // Increment move counter
+      moves++;
+  
+      // Update state to visualize sort status
+      setBarArr([...arr]);
+      setMoveCount(moves);
+  
+      // Add a delay
+      await new Promise((resolve) => setTimeout(resolve, 100));
     }
-        // if the array is sorted, return the sorted array
-    console.log(`Bogo sort complete in only ${moves}!`)
+  
+    // If the array is sorted, return the sorted array
+    console.log(`Bogo sort complete in only ${moves}!`);
     return true;
-}
+
+  }
