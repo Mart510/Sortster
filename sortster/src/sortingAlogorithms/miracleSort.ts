@@ -3,24 +3,23 @@
 import sortChecker from "../utils/sortChecker";
 
 // Mircale sort
-export default async function miracleSort(setBarArr: (arr: number[]) => void, arr: number[], setMoveCount: (moves:number) => void) {
+export default async function miracleSort(setBarArr: (arr: number[]) => void, arr: number[], setMoveCount: (moves:number) => void, stopRef: React.MutableRefObject<boolean>) {
     let moves = 0;
 
     // start checking
-    while(!sortChecker(arr)) {
+    while(!sortChecker(arr) && !stopRef.current) {
         console.log(`miracle sort check number ${moves}`)
         // increment move counter
         moves++;
-        // update state to visualise sort status
-                // update state to visualize sort status
-                await new Promise((resolve) => {
-                    setTimeout(() => {
-                        setBarArr([...arr]);
-                        setMoveCount(moves)
-                        resolve();
-                    }, 100);
-                })      
-    }
+    
+        // Update state to visualize sort status
+        setBarArr([...arr]);
+        setMoveCount(moves);
+    
+        // Add a delay
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        }
+
             // if the array is sorted, return the sorted array
             console.log(`Mircale sort complete in only ${moves}!`)
             return true;

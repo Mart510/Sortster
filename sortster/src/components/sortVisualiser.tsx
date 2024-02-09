@@ -97,7 +97,8 @@ const SortVisualiser = () => {
     setSortChoice(dropDownChoice.target.value)
   };
 
-  // sorting algorithm switch
+
+  // Start button handler and sorting algorithm switch
   const sortAlgorithm = (SortSelection:string) => {
     switch(SortSelection) {
       case 'bogo sort':
@@ -108,9 +109,6 @@ const SortVisualiser = () => {
         break;
     }
   }
-
-  // Start button handler?
-
 
 
   // Stop button handler
@@ -132,6 +130,8 @@ const SortVisualiser = () => {
     console.log(`Reset button clicked isStopped state is now ${isStopped}`)
     // reset column state
     setBarArr(barArrReset);
+    // reset move count
+    setMoveCount(0);
   }
 
   return (
