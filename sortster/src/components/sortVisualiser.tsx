@@ -21,7 +21,9 @@ const SortVisualiser = () => {
     // number of columns from context
     const { columnNumber, updateColumnNumber } = useContext(ColumnNumberContext)
     // is stopped for stop/start and reset functions
-    const { isStopped, updateIsStoppedTrue, updateIsStoppedFalse } = useContext(StopSortContext);
+    const { isStopped, updateIsStoppedTrue, updateIsStoppedFalse, stopRef } = useContext(
+      StopSortContext
+    );
 
     // Local states
     // state for array bars, init to empty (local state allows it to be animated)
@@ -32,8 +34,9 @@ const SortVisualiser = () => {
     const [moveCount, setMoveCount] = useState(0)
 
     // state for timer
-    const [startTimer, setStartTimer] = useState(false)
-    const timerReadout = useTimer(startTimer);
+    const [startTimer, setStartTimer] = useState(false);
+    const [resetTimer, setResetTimer] = useState(false);
+    const timerReadout = useTimer(startTimer, resetTimer, stopRef);
 
     // state to store array at start of sort
     const [barArrReset, setBarArrResetState] = useState(barArr)
@@ -74,13 +77,21 @@ const SortVisualiser = () => {
   }, [columnNumber]);
 
   // Animation controller
-  function animationController():void {
+  function startButtonHandler():void {
     // set reset value
     setBarArrResetState(barArr);
     // start timer
     setStartTimer(true);
+    // reset the state of timer reset
+    setResetTimer(false);
     // Call the sort algo
     sortAlgorithm(sortChoice)
+
+    // If sorting is not in progress, start a new sort
+    if (isStopped) {
+      updateIsStoppedFalse(); // Reset the stop condition
+      sortAlgorithm(sortChoice);
+    }
  
   }
 
@@ -89,19 +100,19 @@ const SortVisualiser = () => {
     setSortChoice(dropDownChoice.target.value)
   };
 
-  // sorting algorithm switch
+
+  // Start button handler and sorting algorithm switch
   const sortAlgorithm = (SortSelection:string) => {
     switch(SortSelection) {
       case 'bogo sort':
-        bogoSort(setBarArr, barArr.slice(), setMoveCount);
+        bogoSort(setBarArr, barArr.slice(), setMoveCount, stopRef);
         break;
       case 'miracle sort':
-        miracleSort(setBarArr, barArr.slice(), setMoveCount);
+        miracleSort(setBarArr, barArr.slice(), setMoveCount, stopRef);
         break;
     }
   }
 
-  // Start button handler?
 
   // Stop button handler
   const stopSort = () => {
@@ -122,6 +133,10 @@ const SortVisualiser = () => {
     console.log(`Reset button clicked isStopped state is now ${isStopped}`)
     // reset column state
     setBarArr(barArrReset);
+    // reset move count
+    setMoveCount(0);
+    // reset the timer
+    setResetTimer(true);
   }
 
   return (
@@ -169,8 +184,8 @@ const SortVisualiser = () => {
       </div>
     </div>
     {/* Start / Reset buttons */}
-       <div className="md:w-1/5 flex justify-between content-center ml-auto mr-auto">
-          <button className="md:pl-8 md:pr-8" onClick={animationController}>
+       <div className="md:w-3/12 flex justify-between content-center ml-auto mr-auto">
+          <button className="md:pl-8 md:pr-8" onClick={startButtonHandler}>
             Start
           </button>
           <button className="md:pl-8 md:pr-8" onClick={stopSort}>
