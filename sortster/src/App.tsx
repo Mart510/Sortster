@@ -2,7 +2,7 @@
 import './App.css'
 // component importrs
 import SortVisualiser from './components/sortVisualiser'
-import StartResetButton from './components/startResetButton'
+//import StartResetButton from './components/startResetButton'
 import SortControls from './components/sortControls'
 
 
