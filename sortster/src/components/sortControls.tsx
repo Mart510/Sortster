@@ -8,7 +8,7 @@ export default function SortControls() {
     const { columnNumber, updateColumnNumber } = useContext(ColumnNumberContext)
 
     // when scroll wheel over slider or input box increment/decrement by 10
-    const handleWheelInput = (e) => {
+    const handleWheelInput = (e: React.WheelEvent<HTMLInputElement>) => {
     // TO DO
     // Add way to stop the window scrolling when interacting with these elements using on onWheel
     
@@ -18,22 +18,18 @@ export default function SortControls() {
             // check if number is a multiple of 10
             if (columnNumber % 10 !== 0) {
                 // if not round it down to the next 10
-                updateColumnNumber((currentColNum) =>
-                    (Math.ceil(currentColNum / 10)*10)
-                )
+                updateColumnNumber(Math.ceil(columnNumber / 10)*10)
             }
-            updateColumnNumber((currentColNum) => Math.max(10, currentColNum - 10))
+            updateColumnNumber(Math.max(10, columnNumber - 10))
         } else {
             // scroll up, increment
             // check if number is a multiple of 10
             if (columnNumber % 10 !== 0) {
                 // if not round it up to the next 10
-                updateColumnNumber((currentColNum) =>
-                    (Math.floor(currentColNum / 10)*10)
-                )
+                updateColumnNumber(Math.floor(columnNumber / 10)*10)
             }
             // scroll up, increment
-            updateColumnNumber((currentColNum) => Math.min(1000, currentColNum + 10))
+            updateColumnNumber(Math.min(1000, columnNumber + 10))
         }
     };
 

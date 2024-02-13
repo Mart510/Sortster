@@ -8,7 +8,7 @@ const useTimer = (shouldStart :boolean, resetTimer:boolean, stopRef: React.Mutab
     const [hundrethOfaSecond, sethundrethOfaSecond] = useState(0);
 
     useEffect(() => {
-        let interval;
+        let interval: NodeJS.Timeout;
 
         // only start when start state is truthy
         if (shouldStart) {

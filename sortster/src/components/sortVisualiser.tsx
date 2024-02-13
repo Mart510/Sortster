@@ -1,5 +1,5 @@
 // import block
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import randomIntInator from "../utils/randomIntGenerator";
 import bogoSort from "../sortingAlogorithms/bogoSort";
 import useTimer from "../customHooks/useTimer";
@@ -10,11 +10,11 @@ import miracleSort from "../sortingAlogorithms/miracleSort";
 
 const SortVisualiser = () => {
   // Animation speed controller
-  const ANIMATION_SPEED = 1;
+  //const ANIMATION_SPEED = 1;
   // Primary colour of array bars
   const BAR_COLOUR = "teal-900";
   // colour of compared bars (when animated)
-  const COMP_COLOUR = "red-900";
+  //const COMP_COLOUR = "red-900";
 
   // STATE BLOCK
     // Global states
@@ -96,7 +96,7 @@ const SortVisualiser = () => {
   }
 
   // onChange handler to update the sortChoice state
-  const sortChangeHandler = (dropDownChoice) => {
+  const sortChangeHandler = (dropDownChoice: React.ChangeEvent<HTMLSelectElement>) => {
     setSortChoice(dropDownChoice.target.value)
   };
 

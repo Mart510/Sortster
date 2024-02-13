@@ -1,5 +1,5 @@
 // import block
-import React, { useState } from "react";
+import { useState } from "react";
 
 // component to manage the start/stop and reset of the sorting
 export default function StartResetButton() {
@@ -12,8 +12,6 @@ export default function StartResetButton() {
   const handleStartClick = () => {
     console.log(`Starting sort(s)`)
     if (!sortingInProgress) {
-      // If sorting is not already in progress, call the startSorting function
-      startSorting();
       setSortingInProgress(true);
     }
   };
