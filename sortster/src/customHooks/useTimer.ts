@@ -2,25 +2,36 @@
 import { useEffect, useState } from "react";
 
 // custom hook to run timer
-const useTimer = (shouldStart :boolean) => {
+const useTimer = (shouldStart :boolean, resetTimer:boolean, stopRef: React.MutableRefObject<boolean>) => {
+    
     // Setting units
     const [hundrethOfaSecond, sethundrethOfaSecond] = useState(0);
 
     useEffect(() => {
-        let interval
+        let interval;
 
         // only start when start state is truthy
         if (shouldStart) {
         interval = setInterval(() => {
+            // check to see if the timer has been stopped
+            if (!stopRef.current){
             // increment the timer by 1
             sethundrethOfaSecond((prevhundrethOfaSecond) => prevhundrethOfaSecond + 1);
+            }
             // every hundreth of a second
         }, 10);
     }
 
     // clear the interval
     return () => clearInterval(interval);
-    }, [shouldStart]);
+    }, [shouldStart, stopRef]);
+
+    // Reset the timer
+    useEffect(() => {
+        if (resetTimer) {
+            sethundrethOfaSecond(0);
+        }
+    }, [resetTimer]);
 
     // clock display
         // calc hours

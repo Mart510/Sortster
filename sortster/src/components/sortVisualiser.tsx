@@ -34,8 +34,9 @@ const SortVisualiser = () => {
     const [moveCount, setMoveCount] = useState(0)
 
     // state for timer
-    const [startTimer, setStartTimer] = useState(false)
-    const timerReadout = useTimer(startTimer);
+    const [startTimer, setStartTimer] = useState(false);
+    const [resetTimer, setResetTimer] = useState(false);
+    const timerReadout = useTimer(startTimer, resetTimer, stopRef);
 
     // state to store array at start of sort
     const [barArrReset, setBarArrResetState] = useState(barArr)
@@ -76,11 +77,13 @@ const SortVisualiser = () => {
   }, [columnNumber]);
 
   // Animation controller
-  function animationController():void {
+  function startButtonHandler():void {
     // set reset value
     setBarArrResetState(barArr);
     // start timer
     setStartTimer(true);
+    // reset the state of timer reset
+    setResetTimer(false);
     // Call the sort algo
     sortAlgorithm(sortChoice)
 
@@ -132,6 +135,8 @@ const SortVisualiser = () => {
     setBarArr(barArrReset);
     // reset move count
     setMoveCount(0);
+    // reset the timer
+    setResetTimer(true);
   }
 
   return (
@@ -180,7 +185,7 @@ const SortVisualiser = () => {
     </div>
     {/* Start / Reset buttons */}
        <div className="md:w-3/12 flex justify-between content-center ml-auto mr-auto">
-          <button className="md:pl-8 md:pr-8" onClick={animationController}>
+          <button className="md:pl-8 md:pr-8" onClick={startButtonHandler}>
             Start
           </button>
           <button className="md:pl-8 md:pr-8" onClick={stopSort}>
