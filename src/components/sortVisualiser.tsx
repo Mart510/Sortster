@@ -31,7 +31,7 @@ const SortVisualiser = () => {
     // state for width (bars to take up 80% of container in total with the spacing taking up the rest)
     const [barWidth, setBarWidth] = useState<number>((100 / columnNumber) * 0.8);
     // state for move number counter
-    const [moveCount, setMoveCount] = useState(9999999999999999)
+    const [moveCount, setMoveCount] = useState(0)
 
     // state for timer
     const [startTimer, setStartTimer] = useState(false);
@@ -144,9 +144,9 @@ const SortVisualiser = () => {
       {/* Master columbn container */}
       <div className="border-slate-900 dark:border-stone-500 border-2 p-4 m-4 rounded-2xl text-xs sm:text-lg">
       {/* header control container */}
-        <div className="flex justify-between mb-6">
+        <div className="flex flex-col content-center lg:flex-row lg:justify-between mb-6 w-full">
         {/* sort method selector */}
-            <div className="w-52">
+            <div className="w-52 ml-auto mr-auto lg:ml-0 lg:mr-0 pb-3 lg:pb-0">
                 <select className="sortMethod pl-1 pr-1 rounded-md" onChange={sortChangeHandler}>
                     <option value={''} disabled selected>Choose sort alogorithm</option>
                     <option value={'bogo sort'}>Bogo sort</option>
@@ -154,11 +154,11 @@ const SortVisualiser = () => {
                 </select>
             </div>
         {/* number of moves counter */}
-            <div className="inline-flex w-64 text-center">
+            <div className="inline-flex w-auto lg:min-w-96 text-center ml-auto mr-auto lg:ml-0 lg:mr-0 pb-3 lg:pb-0">
                 <p>Total number of moves:</p><p>&nbsp;</p><p>{moveCount}</p>
             </div>
         {/* timer */}
-            <div className="w-52 text-right">
+            <div className="w-auto lg:w-52 text-center lg:text-right ml-auto mr-auto lg:ml-0 lg:mr-0 pb-3 lg:pb-0">
                 <p>{timerReadout}</p>
             </div>
         </div>
