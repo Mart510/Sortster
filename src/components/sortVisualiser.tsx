@@ -31,7 +31,7 @@ const SortVisualiser = () => {
     // state for width (bars to take up 80% of container in total with the spacing taking up the rest)
     const [barWidth, setBarWidth] = useState<number>((100 / columnNumber) * 0.8);
     // state for move number counter
-    const [moveCount, setMoveCount] = useState(0)
+    const [moveCount, setMoveCount] = useState(9999999999999999)
 
     // state for timer
     const [startTimer, setStartTimer] = useState(false);
