@@ -35,7 +35,7 @@ export default function SortControls() {
     return (
     <>
       {/* set number of columns to sort */}
-      <div className="w-3/5 flex items-center m-auto justify-center text-xs md:text-2xl">
+      <div className="w-auto lg:w-3/5 flex items-center m-auto justify-center text-xs md:text-2xl">
         <p>Number of Columns:</p>
         {/* input slider to control num of columns */}
         <input
