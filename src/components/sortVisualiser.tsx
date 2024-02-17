@@ -6,7 +6,13 @@ import useTimer from "../customHooks/useTimer";
 // context imports
 import { ColumnNumberContext } from "../contexts/columnNumberContext";
 import { StopSortContext } from "../contexts/stopSortContext";
+// sort algo imports
 import miracleSort from "../sortingAlogorithms/miracleSort";
+import stalinSort from "../sortingAlogorithms/stalinSort";
+import thanosSort from "../sortingAlogorithms/thanosSort";
+import zenSort from "../sortingAlogorithms/zenSort";
+import genghisKhanSort from "../sortingAlogorithms/genghisKhanSort";
+import communistSort from "../sortingAlogorithms/communistSort";
 
 const SortVisualiser = () => {
   // Animation speed controller
@@ -78,6 +84,13 @@ const SortVisualiser = () => {
 
   // Animation controller
   function startButtonHandler():void {
+
+    // If sorting is in progress, do nothing
+    if (!isStopped) {
+      console.log("Sort is already running. Please wait.");
+      return;
+    }
+
     // set reset value
     setBarArrResetState(barArr);
     // start timer
@@ -109,6 +122,21 @@ const SortVisualiser = () => {
         break;
       case 'miracle sort':
         miracleSort(setBarArr, barArr.slice(), setMoveCount, stopRef);
+        break;
+      case 'stalin sort':
+        stalinSort(setBarArr, barArr.slice(), setMoveCount, stopRef);
+        break;
+      case 'thanos sort':
+        thanosSort(setBarArr, barArr.slice(), setMoveCount, stopRef);
+        break;
+      case 'zen sort':
+        zenSort(setBarArr, barArr.slice(), setMoveCount, stopRef);
+        break;
+      case 'ghenghis khan sort':
+        genghisKhanSort(setBarArr, barArr.slice(), setMoveCount, stopRef);
+        break;
+      case 'communist sort':
+        communistSort(setBarArr, barArr.slice(), setMoveCount, stopRef);
         break;
     }
   }
@@ -151,6 +179,11 @@ const SortVisualiser = () => {
                     <option value={''} disabled selected>Choose sort alogorithm</option>
                     <option value={'bogo sort'}>Bogo sort</option>
                     <option value={'miracle sort'}>Miracle sort</option>
+                    <option value={'stalin sort'}>Stalin sort</option>
+                    <option value={'thanos sort'}>Thanos sort</option>
+                    <option value={'zen sort'}>Zen sort</option>
+                    <option value={'ghenghis khan sort'}>Ghenghis Khan sort</option>
+                    <option value={'communist sort'}>Communist sort</option>
                 </select>
             </div>
         {/* number of moves counter */}

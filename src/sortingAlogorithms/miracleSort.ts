@@ -22,5 +22,6 @@ export default async function miracleSort(setBarArr: (arr: number[]) => void, ar
 
     // if the array is sorted, return the sorted array
     console.log(`Mircale sort complete in only ${moves}!`)
+    stopRef.current = true;
     return true;
 }
