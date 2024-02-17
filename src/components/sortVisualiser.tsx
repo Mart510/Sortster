@@ -7,6 +7,8 @@ import useTimer from "../customHooks/useTimer";
 import { ColumnNumberContext } from "../contexts/columnNumberContext";
 import { StopSortContext } from "../contexts/stopSortContext";
 import miracleSort from "../sortingAlogorithms/miracleSort";
+import stalinSort from "../sortingAlogorithms/stalinSort";
+import thanosSort from "../sortingAlogorithms/thanosSort";
 
 const SortVisualiser = () => {
   // Animation speed controller
@@ -110,6 +112,12 @@ const SortVisualiser = () => {
       case 'miracle sort':
         miracleSort(setBarArr, barArr.slice(), setMoveCount, stopRef);
         break;
+      case 'stalin sort':
+        stalinSort(setBarArr, barArr.slice(), setMoveCount, stopRef);
+        break;
+      case 'thanos sort':
+        thanosSort(setBarArr, barArr.slice(), setMoveCount, stopRef);
+        break;
     }
   }
 
@@ -151,6 +159,9 @@ const SortVisualiser = () => {
                     <option value={''} disabled selected>Choose sort alogorithm</option>
                     <option value={'bogo sort'}>Bogo sort</option>
                     <option value={'miracle sort'}>Miracle sort</option>
+                    <option value={'stalin sort'}>Stalin sort</option>
+                    <option value={'thanos sort'}>Thanos sort</option>
+
                 </select>
             </div>
         {/* number of moves counter */}
