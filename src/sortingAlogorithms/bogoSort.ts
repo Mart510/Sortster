@@ -47,6 +47,7 @@ export default async function bogoSort(setBarArr: (arr: number[]) => void, arr: 
     }
   
     // If the array is sorted, return the sorted array
+    stopRef.current = true;
     console.log(`Bogo sort complete in only ${moves}!`);
     return true;
 
