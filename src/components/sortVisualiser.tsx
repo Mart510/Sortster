@@ -111,6 +111,17 @@ const SortVisualiser = () => {
   // onChange handler to update the sortChoice state
   const sortChangeHandler = (dropDownChoice: React.ChangeEvent<HTMLSelectElement>) => {
     setSortChoice(dropDownChoice.target.value)
+    // if stopped is false, flip it to true on change to enable the start button
+    if (!isStopped) {
+      updateIsStoppedTrue();
+    }
+    // if it's already been working, reset the number of moves and the timer before starting the new one
+    if (moveCount > 0) {
+      setMoveCount(0);
+    }
+    if (timerReadout != '00:00') {
+      setResetTimer(true);
+    }
   };
 
 
@@ -218,7 +229,7 @@ const SortVisualiser = () => {
     </div>
     {/* Start / Reset buttons */}
        <div className="md:w-3/12 flex justify-between content-center ml-auto mr-auto">
-          <button className="md:pl-8 md:pr-8" onClick={startButtonHandler}>
+          <button className="md:pl-8 md:pr-8 disabled:bg-gray-800 disabled:opacity-50" onClick={startButtonHandler} disabled={!isStopped}>
             Start
           </button>
           <button className="md:pl-8 md:pr-8" onClick={stopSort}>
