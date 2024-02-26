@@ -16,6 +16,12 @@ export default function SortControls() {
     const handleWheelInput = (e: React.WheelEvent<HTMLInputElement>) => {
     // TO DO
     // Add way to stop the window scrolling when interacting with these elements using on onWheel
+        // stopping the wheel form scrolling when
+
+        // check if the input element is disabled
+        if (e.currentTarget.disabled) {
+          return;
+        }
         // change number in input
         if (e.deltaY > 0) {
             // scroll down, decrement
