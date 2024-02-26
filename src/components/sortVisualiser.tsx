@@ -180,7 +180,7 @@ const SortVisualiser = () => {
 
   return (
     <>
-      {/* Master columbn container */}
+      {/* Master column container */}
       <div className="border-slate-900 dark:border-stone-500 border-2 p-4 m-4 rounded-2xl text-xs sm:text-lg">
       {/* header control container */}
         <div className="flex flex-col content-center lg:flex-row lg:justify-between mb-6 w-full">

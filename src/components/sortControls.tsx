@@ -1,11 +1,16 @@
 // import block
 import { useContext } from "react"
 import { ColumnNumberContext } from "../contexts/columnNumberContext"
+import { StopSortContext } from "../contexts/stopSortContext";
+
 
 // component to manage the column controls at the top of the page
 export default function SortControls() {
     // state block
     const { columnNumber, updateColumnNumber } = useContext(ColumnNumberContext)
+    // is stopped for stop/start and reset functions
+    const {isStopped} = useContext(StopSortContext
+    );
 
     // when scroll wheel over slider or input box increment/decrement by 10
     const handleWheelInput = (e: React.WheelEvent<HTMLInputElement>) => {
@@ -47,6 +52,8 @@ export default function SortControls() {
           onChange={(e) => updateColumnNumber(parseInt(e.target.value, 10))}
           // scroll wheel adjustment functionality
           onWheel={handleWheelInput}
+          // if the sort is running disable the input field
+          disabled={!isStopped}
         />
         {/* box to display the num of columns and allow it to be typed in */}
         <input
@@ -58,6 +65,8 @@ export default function SortControls() {
           onChange={(e) => updateColumnNumber(parseInt(e.target.value, 10))}
           // scroll wheel adjustment functionality
           onWheel={handleWheelInput}
+          // if the sort is running disable the input field
+          disabled={!isStopped}
         />
       </div>
     </>
