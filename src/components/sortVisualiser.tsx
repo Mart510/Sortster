@@ -13,6 +13,7 @@ import thanosSort from "../sortingAlogorithms/thanosSort";
 import zenSort from "../sortingAlogorithms/zenSort";
 import genghisKhanSort from "../sortingAlogorithms/genghisKhanSort";
 import communistSort from "../sortingAlogorithms/communistSort";
+import bubbleSort from "../sortingAlogorithms/bubbleSort";
 
 const SortVisualiser = () => {
   // Animation speed controller
@@ -149,6 +150,9 @@ const SortVisualiser = () => {
       case 'communist sort':
         communistSort(setBarArr, barArr.slice(), setMoveCount, stopRef);
         break;
+      case 'bubble sort':
+        bubbleSort(setBarArr, barArr.slice(), setMoveCount, stopRef);
+        break;
     }
   }
 
@@ -195,6 +199,7 @@ const SortVisualiser = () => {
                     <option value={'zen sort'}>Zen sort</option>
                     <option value={'ghenghis khan sort'}>Ghenghis Khan sort</option>
                     <option value={'communist sort'}>Communist sort</option>
+                    <option value={'bubble sort'}>Bubble sort</option>
                 </select>
             </div>
         {/* number of moves counter */}
